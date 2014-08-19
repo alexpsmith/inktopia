@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<gamearea>
+  <size>
+    <city>
+      10000
+    </city>
+    <suburbia>
+      10000
+    </suburbia>
+    <warzone>
+      10000
+    </warzone>
+  </size>
+  <section-specific-info>
+    <city>
+      
+    </city>
+  </section-specific-info>
+</gamearea>

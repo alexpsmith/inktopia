@@ -1,0 +1,177 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <style type ="text/css">
+        canvas {
+            border: 1px solid grey;
+            margin-left: 10px;
+            cursor: none;
+            box-shadow: 10px 10px 5px #888888;
+        }
+        .div_ {
+            width: 100px;
+            height: 100px;
+            background-image: url("sample.jpg");
+        }
+        body {
+            background-image: url("cardboard.jpg");
+        }
+    </style>
+</head>
+
+
+<body>
+    <div id ="pxml" style ="display:none">
+        <user-info>
+            <type>
+                E
+            </type>
+            <name>
+                Alex
+            </name>
+            <inktopia-points>
+                0
+            </inktopia-points>
+            <credits>
+                10000
+            </credits>
+            <political-influence>
+                4.3
+            </political-influence>
+            <military-info>
+                <soldiers>
+                    10
+                </soldiers>
+                <armor>
+                    3
+                </armor>
+                <aircraft>
+                    10
+                </aircraft>
+                <warships>
+                    4
+                </warships>
+                <nukes>
+                    0
+                </nukes>
+            </military-info>
+            <geo-information>
+                <section>
+                    suburbia
+                </section>
+                <x>
+                    10
+                </x>
+                <y>
+                    457
+                </y>
+            </geo-information>
+        </user-info>
+    </div>
+    <div id ="dev">
+
+    </div>
+</body>
+<div class ="div_" style ="width:100%; background-image:none"><center><img src = "title.png" /></center></div><br /><br />
+<div class="div_" style ="float:left; width: 20%;"></div>
+<div class="div_" style =" float:right; width: 26%"></div>
+<canvas id ="drawingcanvas" width ="1000" height ="700"></canvas>
+
+<script src="gg.js"></script>
+<script src="property.js"></script>
+<script>
+    function x(pxmlNode) {
+        return $(pxmlNode).html().replace(" ", "");
+    }
+    drawing.bind("drawingcanvas");
+    var background = drawing.LoadImage("sample.jpg");
+    var sampHouse = drawing.LoadImage("sample_house.png");
+    var sampPlayer = drawing.LoadImage("sample_player.png");
+    var sampMouseImage = drawing.LoadImage("sample_mouse.png");
+
+    var sampProperty1 = new Property("h-b", 10000, sampHouse, new Rectangle(100, 300, 200, 195));
+    var sampProperty2 = new Property("h-b", 10000, sampHouse, new Rectangle(300, 300, 200, 195));
+    var sampProperty3 = new Property("h-b", 10000, sampHouse, new Rectangle(500, 300, 200, 195));
+
+  
+    drawing.bindDraw(function () {
+        drawing.DrawImage(background, 0, 0);
+        drawing.DrawImage(background, 499, 0);
+        drawing.DrawImage(background, 0, 500);
+        drawing.DrawImage(background, 499, 500);
+        drawing.DrawImage(sampPlayer, 500, 600);
+
+        sampProperty1.Draw(sampProperty1);
+        sampProperty2.Draw(sampProperty2);
+        sampProperty3.Draw(sampProperty3);
+
+        drawing.DrawImage(sampMouseImage, drawing.mouse.x - 10, drawing.mouse.y - 10);
+    });
+    drawing.bindUpdate(function () { sampProperty1.Update(sampProperty1) });
+    drawing.bindUpdate(function () { sampProperty2.Update(sampProperty2) });
+    drawing.bindUpdate(function () { sampProperty3.Update(sampProperty3) });
+    drawing.bindUpdate(function () {
+        y += 0.001;
+        drawing.canvasContext.translate(0, y)
+    });
+
+    drawing.draw();
+    drawing.update();
+    //go about creating a player
+    //have a script hold base player
+    player = {
+        type: null,
+        name: null,
+        points: null,
+        credits: null,
+        politicalInfluence: null,
+        soldiers: null,
+        armor: null,
+        aircraft: null,
+        warships: null,
+        nukes: null,
+        section: null,
+        x: null,
+        y: null,
+
+        LoadData: function(){
+            player.type = x("type");
+            player.name = x("name");
+            player.points = x("inktopia-points");
+            player.credits = x("credits");
+            player.politicalInfluence = x("political-influence");
+            player.soldiers = x("soldiers");
+            player.armor = x("armor");
+            player.aircraft = x("aircraft");
+            player.warships = x("warships");
+            player.nukes = x("nukes");
+            player.section = x("section");
+            player.x = x("x");
+            player.y = x("y");
+        },
+        dev_displayUserInfo: function () {
+            if (player.type) { $("#dev").append(player.type + "<br />"); }
+            if (player.name) { $("#dev").append(player.name + "<br />"); }
+            if (player.points) { $("#dev").append(player.points + "<br />"); }
+            if (player.credits) { $("#dev").append(player.credits + "<br />"); }
+            if (player.politicalInfluence) { $("#dev").append(player.politicalInfluence + "<br />"); }
+            if (player.soldiers) { $("#dev").append(player.soldiers + "<br />"); }
+            if (player.armor) { $("#dev").append(player.armor + "<br />"); }
+            if (player.aircraft) { $("#dev").append(player.aircraft + "<br />"); }
+            if (player.warships) { $("#dev").append(player.warships + "<br />"); }
+            if (player.nukes) { $("#dev").append(player.nukes + "<br />"); }
+            if (player.section) { $("#dev").append(player.section + "<br />"); }
+            if (player.x) { $("#dev").append(player.x + "<br />"); }
+            if (player.y) { $("#dev").append(player.y + "<br />"); }
+        }
+    }
+
+    player.LoadData();
+    //player.dev_displayUserInfo();
+
+</script>
+</html>
