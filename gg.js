@@ -90,6 +90,10 @@ drawing = {
         c.drawImage(image, x, y);
     },
     ExactDraw: function (image, x, y, rotation, alpha) {
+        if (!alpha && !rotaion) {
+            console.log("NO DRAW, USE DRAWIMAGE INSTEAD");
+            return false;
+        }
         var c = drawing.canvasContext;
         if (!rotation) {
             var rest = c.globalAlpha;
@@ -98,7 +102,13 @@ drawing = {
             c.globalAlpha = rest;
             return;
         }
-        if (!alpha) { }
+        if (!alpha) {
+            canvas.save();
+            canvas.translate(x, y);
+            canvas.rotate(rotation * 0.0174532925);
+            canvas.drawImage(image, -(image.width / 2), -(image.height / 2)); n
+            canvas.restore();
+        }
 
         c.globalAlpha = alpha;
         canvas.save();

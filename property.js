@@ -6,6 +6,8 @@ function Property(type, worth, image, rectangle) {
     this.rectangle = rectangle;
 
     this.hover = false;
+    lord.addToMap(this.rectangle, "property", this);
+    
 
     this.Update = function (o) {
         var mouseRec = new Rectangle(drawing.mouse.x, drawing.mouse.y, 10, 10);
