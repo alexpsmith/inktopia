@@ -123,11 +123,14 @@
 <script src="property.js"></script>
 <script src="player.js"></script>
 <script src="lord.js"></script>
+    <script src="cevent.js"></script>
+    <script src="ui.js"></script>
 <script>
     function x(pxmlNode) {
         return $(pxmlNode).html().replace(" ", "");
     }
     drawing.bind("drawingcanvas");
+    ui.LoadImages();
     var background = drawing.LoadImage("sample.jpg");
     var sampHouse = drawing.LoadImage("sample_house.png");
     var sampPlayer = drawing.LoadImage("sample_player.png");

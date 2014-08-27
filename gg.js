@@ -37,6 +37,12 @@ drawing = {
             drawing.mouse.x = mousePos.x;
             drawing.mouse.y = mousePos.y;
         }, false);
+        drawing.canvasElement.addEventListener('mousedown', function (evt) {
+            drawing.mouse.down = true;
+        }, false);
+        drawing.canvasElement.addEventListener('mouseup', function (evt) {
+            drawing.mouse.down = false;
+        }, false);
         
     },
     bindDraw: function (draw) {
